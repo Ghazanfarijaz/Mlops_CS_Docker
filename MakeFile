@@ -1,0 +1,22 @@
+# Define variables
+PYTHON=python
+DATASET=your_dataset.csv
+MODEL=model.pkl
+REQUIREMENTS=requirements.txt
+
+# Default target
+.DEFAULT_GOAL := train
+
+# Targets and recipes
+.PHONY: train
+train: $(MODEL)
+$(MODEL): $(DATASET) $(REQUIREMENTS)
+    $(PYTHON) train_model.py
+
+.PHONY: clean
+clean:
+    rm -f $(MODEL)
+
+.PHONY: requirements
+requirements:
+    pip install -r $(REQUIREMENTS)
